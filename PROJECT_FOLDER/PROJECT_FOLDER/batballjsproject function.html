@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bat bal project</title>
+    <link rel="stylesheet" href="batballjsproject.css">
+
+</head>
+<body>
+<h3>bat ball stump game</h3> 
+    <button class="choice-button"  onclick="
+   let computerchoice=Generatecomputerchoice();
+   let resultmsg=Generateresultmsg('bat',computerchoice);
+   showresult('stump',computerchoice,resultmsg);
+    "><img src=" https://github.com/KG-Coding-with-Prashant-Sir/JavaScript_Complete_YouTube/blob/main/8%20JSON%20Local%20Storage%20Date%20and%20DOM/Cricket%20Game/images/bat.png?raw=true" alt="bat " class="choose-image">
+ </button>
+
+    <button  class="choice-button"  onclick=" 
+       computerchoice=Generatecomputerchoice();
+        resultmsg=Generateresultmsg('ball',computerchoice);
+        showresult('ball',computerchoice,resultmsg);
+   "> <img src=" https://github.com/KG-Coding-with-Prashant-Sir/JavaScript_Complete_YouTube/blob/main/8%20JSON%20Local%20Storage%20Date%20and%20DOM/Cricket%20Game/images/ball.png?raw=true" alt="bat " class="choose-image">
+</button>
+   
+    <button  class="choice-button" onclick="
+    computerchoice= Generatecomputerchoice();
+    resultmsg=Generateresultmsg('stump',computerchoice);
+    showresult('stump',computerchoice,resultmsg);
+   "> <img src=" https://github.com/KG-Coding-with-Prashant-Sir/JavaScript_Complete_YouTube/blob/main/8%20JSON%20Local%20Storage%20Date%20and%20DOM/Cricket%20Game/images/stump.png?raw=true" alt="bat " class="choose-image">
+</button> 
+    <h3 id="userchoice"></h3>
+    <h3 id="computerchoice"></h3>
+    <h3 id="resultmsg"></h3>
+    <h3 id="score"></h3>
+    <button id="button" onclick="localStorage.clear() 
+    resetscore();
+    ">Reset</button>
+    <script>
+        let scorestr=localStorage.getItem('score');
+        let score;
+        resetscore(scorestr);
+    function resetscore(scorestr){
+        score= scorestr ? JSON.parse(scorestr) : {
+            win:0,
+            lost:0,
+            tie:0,
+        };
+        score.displayscore=function() {
+                return ` win:${score.win} ,lost:${score.lost}, tie:${score.tie}`;
+            } 
+        showresult(); }
+        function Generatecomputerchoice() {
+            let randomNumber=Math.round()*3;
+    if(randomNumber> 0 && randomNumber<=1){
+         return 'bat';
+    }
+    else if(randomNumber>1 && randomNumber<=2){
+         return 'ball';
+    }
+    else{
+        return 'stump';
+    }}
+      function Generateresultmsg(userchoice,computerchoice) {
+    if(userchoice==='bat'){
+        if(computerchoice==='bat'){
+            score.tie++;
+        return `It's a tie`;
+    }
+    else if(computerchoice==='ball'){
+        score.win++;
+        return 'user won';
+    }
+    else{
+        score.lost++;
+        return 'computer won';
+    }
+    }
+    else if(userchoice==='ball'){
+        if(computerchoice==='ball'){
+            score.tie++;
+        return `It's a tie`;
+    }
+    else if(computerchoice==='stump'){
+        score.win++;
+        return 'user won';
+    }
+    else{
+        score.lost++;
+        return 'computer won';
+    }
+    }
+    else{
+        if(computerchoice==='stump'){
+            score.tie++;
+        return `It's a tie`;
+    }
+    else if(computerchoice==='bat'){
+        score.win++;
+        return 'user won';
+    }
+    else{
+        score.lost++;
+        return 'computer won';
+    }
+    }}
+    function showresult(userchoice,computerchoice,resultmsg){
+       localStorage.setItem('score',JSON.stringify(score)) ;
+       document.querySelector('#userchoice').innerHTML= userchoice!==undefined ?`You have choosen:${userchoice}.` : ' ';
+       document.querySelector('#computerchoice').innerHTML= computerchoice!== undefined ? `Computer has choosen:${computerchoice}.` : '';
+       document.querySelector('#resultmsg').innerHTML= resultmsg!==undefined ?`Resultmsg is:${resultmsg}.` : '';
+       document.querySelector('#score').innerHTML=`Score :${score.displayscore()}.`;
+    }
+    </script>
+</body>
+</html>

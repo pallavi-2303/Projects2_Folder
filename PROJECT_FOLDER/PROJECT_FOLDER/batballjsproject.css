@@ -1,0 +1,28 @@
+body{
+    text-align: center;
+}
+h3{
+    text-transform: capitalize;
+    font-size:35px;
+    font-weight:700;
+}
+.choice-button{
+    height:100px;
+    width:100px;
+    border:none;
+    margin:10px;
+    border-radius: 50px;
+    background-color:rgb(34, 123, 94);
+    cursor:pointer;
+}
+.choose-image{
+   height:80px; 
+}
+#button{
+    font-size:35px;
+    border:none;
+    background-color: rgb(207, 14, 14);
+    color:rgb(48, 8, 8);
+    border-radius:5px;
+    
+}
